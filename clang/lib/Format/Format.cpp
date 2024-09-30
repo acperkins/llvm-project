@@ -402,6 +402,7 @@ template <> struct MappingTraits<FormatStyle::KeepEmptyLinesStyle> {
 
 template <> struct ScalarEnumerationTraits<FormatStyle::LanguageKind> {
   static void enumeration(IO &IO, FormatStyle::LanguageKind &Value) {
+    IO.enumCase(Value, "C", FormatStyle::LK_C);
     IO.enumCase(Value, "Cpp", FormatStyle::LK_Cpp);
     IO.enumCase(Value, "Java", FormatStyle::LK_Java);
     IO.enumCase(Value, "JavaScript", FormatStyle::LK_JavaScript);
@@ -3706,7 +3707,7 @@ reformat(const FormatStyle &Style, StringRef Code,
     return IntegerLiteralSeparatorFixer().process(Env, Expanded);
   });
 
-  if (Style.isCpp()) {
+  if (Style.isCpp() || Style.isC()) {
     if (Style.QualifierAlignment != FormatStyle::QAS_Leave)
       addQualifierAlignmentFixerPasses(Expanded, Passes);
 
@@ -3953,6 +3954,8 @@ static FormatStyle::LanguageKind getLanguageByFileName(StringRef FileName) {
   }
   if (FileName.ends_with_insensitive(".td"))
     return FormatStyle::LK_TableGen;
+  if (FileName.ends_with_insensitive(".c"))
+    return FormatStyle::LK_C;
   if (FileName.ends_with_insensitive(".cs"))
     return FormatStyle::LK_CSharp;
   if (FileName.ends_with_insensitive(".json"))

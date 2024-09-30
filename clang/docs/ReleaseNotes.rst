@@ -583,6 +583,8 @@ clang-format
 
 - Adds ``BreakBinaryOperations`` option.
 
+- Support for formatting C files (\*.c) separately from C++ files in clang-format.
+
 libclang
 --------
 - Add ``clang_isBeforeInTranslationUnit``. Given two source locations, it determines

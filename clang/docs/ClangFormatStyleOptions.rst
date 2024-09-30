@@ -4601,7 +4601,7 @@ the configuration (without a prefix: ``Auto``).
     Do not use.
 
   * ``LK_Cpp`` (in configuration: ``Cpp``)
-    Should be used for C, C++.
+    Should be used for C++.
 
   * ``LK_CSharp`` (in configuration: ``CSharp``)
     Should be used for C#.
@@ -4633,6 +4633,9 @@ the configuration (without a prefix: ``Auto``).
     Should be used for Verilog and SystemVerilog.
     https://standards.ieee.org/ieee/1800/6700/
     https://sci-hub.st/10.1109/IEEESTD.2018.8299595
+
+  * ``LK_C`` (in configuration: ``C``)
+    Should be used for C.
 
 
 

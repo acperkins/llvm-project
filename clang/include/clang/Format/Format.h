@@ -3233,7 +3233,9 @@ struct FormatStyle {
   enum LanguageKind : int8_t {
     /// Do not use.
     LK_None,
-    /// Should be used for C, C++.
+    /// Should be used for C.
+    LK_C,
+    /// Should be used for C++.
     LK_Cpp,
     /// Should be used for C#.
     LK_CSharp,
@@ -3258,6 +3260,7 @@ struct FormatStyle {
     /// https://sci-hub.st/10.1109/IEEESTD.2018.8299595
     LK_Verilog
   };
+  bool isC() const { return Language == LK_C; }
   bool isCpp() const { return Language == LK_Cpp || Language == LK_ObjC; }
   bool isCSharp() const { return Language == LK_CSharp; }
   bool isJson() const { return Language == LK_Json; }
@@ -5519,6 +5522,8 @@ FormatStyle::LanguageKind guessLanguage(StringRef FileName, StringRef Code);
 // Returns a string representation of ``Language``.
 inline StringRef getLanguageName(FormatStyle::LanguageKind Language) {
   switch (Language) {
+  case FormatStyle::LK_C:
+    return "C";
   case FormatStyle::LK_Cpp:
     return "C++";
   case FormatStyle::LK_CSharp:
